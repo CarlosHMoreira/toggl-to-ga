@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer';
 import { config } from '../config'
 
 import setAuthData from './setAuthData';
+import getReport from './getReport';
 
 export default async () => {
     const browser = await puppeteer.launch();
@@ -9,8 +10,11 @@ export default async () => {
     const page = await browser.newPage();
     await page.goto(config.gaUrl);
     
+    // await page.screenshot({path: `screenshots/${new Date().toISOString()}.png`});
+    
     await setAuthData(page, config);
-    await page.screenshot({path: `screenshots/${new Date().toISOString()}.png`});
+
+    getReport();
 
     await browser.close();
 }
