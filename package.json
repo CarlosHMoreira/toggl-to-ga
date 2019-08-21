@@ -5,8 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r esm index.js",
-    "dev": "nodemon --watch 'src/' --exec \"ts-node ./index.ts\" -e ts",
+    "start": "nodemon --watch 'src/' --exec \"ts-node ./index.ts\" -e ts",
     "test": "jest --no-cache --passWithNoTests"
   },
   "keywords": [],
