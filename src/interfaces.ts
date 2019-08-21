@@ -4,3 +4,14 @@ export interface Config {
     username: string,
     password: string,
 }
+
+export interface FormRegister {
+    project: number,
+    system: number,
+    category: number,
+    
+}
+
+
+
+

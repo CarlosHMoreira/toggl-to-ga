@@ -4,7 +4,7 @@ import { config } from '../config'
 import l from '../utils/logger';
 import setAuthData from './setAuthData';
 // import takePrint from '../utils/takePrint';
-import getReport from './getReport';
+// import getReport from './getReport';
 
 export default async () => {
     const browser = await puppeteer.launch();
@@ -14,13 +14,13 @@ export default async () => {
 
     // await takePrint(page);
     l.info('Logged in');
-
+    // Navega para página do formulário de lançamento de horários.
     const registerTimeUrl = `${config.gaUrl}Lists/RegistrosCanaisDigitais/NewForm.aspx?RootFolder`;
     await page.goto(registerTimeUrl);
-    // await takePrint(page);
     l.info(`Navigated to ${registerTimeUrl}`);
-
-    getReport();
+    // await takePrint(page);
+    l.info(`Get toggl data from csv`);
+    // getReport();
 
 
     await browser.close();
