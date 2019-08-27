@@ -3,10 +3,8 @@ import  path  from 'path';
 import prompts, { PromptObject, Choice } from 'prompts';
 import csvParser from 'csv-parser'
 
-import { GetReportsAnswer, TogglRow, Register } from '../interfaces';
+import { GetReportsAnswer, TogglRow } from '../interfaces';
 import l from '../utils/logger';
-import formatDate from '../utils/formatDate';
-import formatTime from '../utils/formatTime';
 
 
 const tryGetReports = async (): Promise<GetReportsAnswer> => {
@@ -72,19 +70,7 @@ const getReportData = async (fileName: string, reportsPath: string): Promise<Tog
         }
     });
 
-const mapToTimesheetFormat = (togglRows: TogglRow[]): Register[] => {
-    return togglRows.map(it => ({
-        project: it.Project,
-        client: it.Client,
-        date: formatDate((it['Start date'])),
-        description: it.Description,
-        start: formatTime(it['Start time']),
-        ended: formatTime(it['End time']),
-    }) as Register);
-};
-
-export default async () => {
-  
+export default async (): Promise<TogglRow[]> => {
     const { reports, reportsPath } = await tryGetReports();    
     
     const reportChosen = reports.length > 1 
@@ -98,6 +84,5 @@ export default async () => {
         throw new Error('No records found in csv');
     }
 
-    const timesheet = mapToTimesheetFormat(reportData);
-    console.log(timesheet);
+    return reportData;
 }
