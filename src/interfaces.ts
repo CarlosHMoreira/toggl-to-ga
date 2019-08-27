@@ -12,6 +12,11 @@ export interface FormRegister {
     
 }
 
+export interface GetReportsAnswer {
+    reportsPath: string,
+    reports: string[],
+}
+
 
 
 
