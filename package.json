@@ -3,21 +3,31 @@
   "name": "toggl-to-ga",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
+  "bin": {
+    "togga": "index.ts"
+  },
   "scripts": {
     "start": "nodemon --watch 'src/' --exec \"ts-node ./index.ts\" -e ts",
-    "test": "jest --no-cache --passWithNoTests"
+    "test": "jest --no-cache --passWithNoTests",
+    "build": "tsc -p .",
+    "refresh": "rm -rf ./node_modules ./dist && npm install",
+    "clean-dist": "rm -rf ./dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/jest": "^24.0.18",
-    "@types/puppeteer": "^1.19.1",
     "dotenv": "^8.1.0",
+    "prompts": "^2.2.1",
+    "puppeteer": "^1.19.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/prompts": "^2.0.1",
+    "@types/puppeteer": "^1.19.1",
     "jest": "^24.9.0",
     "nodemon": "^1.19.1",
-    "puppeteer": "^1.19.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
