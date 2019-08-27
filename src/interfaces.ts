@@ -17,6 +17,36 @@ export interface GetReportsAnswer {
     reports: string[],
 }
 
+export interface TogglRow {
+    User?: string,
+    Email?: string,
+    Client?: string,
+    Project?: string,
+    Task?: string,
+    Description?: string,
+    Billable?: string,
+    'Start date'?: string,
+    'Start time'?: string,
+    'End date'?: string,
+    'End time'?: string,
+    Duration?: string,
+    Tags?: string,
+    Amount?: string,
+}
+
+export interface Register {
+    client?: string,
+    project?: string,
+    description?: string,
+    date?: string,
+    start?: string,
+    ended?: string,
+    activityCategory?: Category,
+    activity?: number, // @todo Create enum of activity 
+}
+
+
+
 
 
 
