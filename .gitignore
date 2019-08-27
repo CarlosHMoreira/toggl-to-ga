@@ -1,5 +1,6 @@
 .env
 screenshots/
+dist
 
 # Logs
 logs
