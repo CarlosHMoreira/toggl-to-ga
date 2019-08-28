@@ -6,6 +6,7 @@
 // import navigateToRegisterForm from './navigateToRegisterForm';
 
 import getReport from './getReport';
+import identifyTags from './identifyTags';
 
 export default async () => {
     // const browser = await puppeteer.launch();
@@ -15,8 +16,9 @@ export default async () => {
     // await navigateToRegisterForm(page, config);
 
     const reportData = await getReport();
-    console.log(reportData);
-
+    const tagsMeaning = await identifyTags(reportData);
+    
+    console.log(tagsMeaning);
 
     // await browser.close();
 }

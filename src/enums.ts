@@ -1,4 +1,4 @@
-enum Category {
+export enum Category {
     Desenvolvimento = 12,
     Testes = 13,
     Análises_e_Especificacoes = 14,

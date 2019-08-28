@@ -1,3 +1,5 @@
+import { Category } from './enums';
+
 export interface Config {
     env: string,
     gaUrl: string,
@@ -45,8 +47,7 @@ export interface Register {
     activity?: number, // @todo Create enum of activity 
 }
 
-
-
-
-
-
+export interface workingOn {
+    activityCategory: Category,
+    activity: Category,
+}
