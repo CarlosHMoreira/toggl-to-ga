@@ -12,6 +12,7 @@ const tryGetReports = async (): Promise<GetReportsAnswer> => {
         type: 'text',
         name: 'reportsPath',
         message: `Type the path to reports directory, relative to ${__dirname} or absolute`,
+        initial: '../../reports',
     } as PromptObject;    
     
     const { reportsPath } = await prompts(promptConfig);
