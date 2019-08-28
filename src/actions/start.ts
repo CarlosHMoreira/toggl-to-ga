@@ -7,6 +7,7 @@
 
 import getReport from './getReport';
 import resolveTags from './resolveTags';
+import resolveProjects from './resolveProjects';
 
 export default async () => {
     // const browser = await puppeteer.launch();
@@ -16,6 +17,8 @@ export default async () => {
     // await navigateToRegisterForm(page, config);
 
     const reportData = await getReport();
+    const projects = await resolveProjects(reportData);
+    console.log(projects);
     const tagsMeaning = await resolveTags(reportData);
         
     console.log(tagsMeaning);
