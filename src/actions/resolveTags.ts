@@ -4,6 +4,7 @@ import { TogglRow, workingOn } from '../interfaces';
 import { Category } from '../enums';
 import { Choice, PromptObject } from 'prompts';
 import l from '../utils/logger';
+import categoryActivityMap from '../config/categoryActivityMap';
 
 const getTags = (reportsTag: string) => reportsTag.split(',');
 
@@ -14,17 +15,22 @@ const getCategoriesOptions = () => {
         .map( ([value, title]: any) => ({ title, value, disable: true } as Choice));
 };
 
-const getSubCategoriesOptions = () => {
-    const categories = Object.entries(Category);
-    return categories
-        .splice(0, (categories.length / 2))
+const getActivity = (categoryId: number) => {
+    const [ activities ] = Object.entries(categoryActivityMap)
+        .filter(([_, obj]) => (categoryId === obj.id))
+        .map(([_, obj]) => obj.activities );
+    
+    const activitiesList =  Object.entries(activities);
+    
+    return activitiesList
+        .splice(0, (activitiesList.length / 2))
         .map( ([value, title]: any) => ({ title, value, disable: true } as Choice));
 };
 
-const askTagMeaning = async (
+
+const askCategory = async (
     tagName: string, 
     categoryChoices: Choice[], 
-    subCategoryChoices: Choice[],
     ) => {
     const questions = [
         {
@@ -33,11 +39,21 @@ const askTagMeaning = async (
             message: `Which category does the ${tagName} tag belong to ?`,
             choices: categoryChoices,
         },
+    ] as PromptObject[];
+
+    return await prompts(questions);
+}
+
+const askActivity = async (
+    tagName: string, 
+    activitiesChoices: Choice[],
+    ) => {
+    const questions = [
         {
             type: "select",
             name: "activity",
             message: `Now which subCategory does the ${tagName} tag belong to ?`,
-            choices: subCategoryChoices,
+            choices: activitiesChoices,
         }, 
     ] as PromptObject[];
 
@@ -48,7 +64,6 @@ export default async (reportData: TogglRow[]) => {
 
     const tagMeaning = new Map<string, workingOn>();
     const categoriesOptions = getCategoriesOptions();
-    const subCategoriesOptions = getSubCategoriesOptions();
 
     for (const { Tags } of reportData) {
         const tags = getTags((Tags || ''));
@@ -56,8 +71,11 @@ export default async (reportData: TogglRow[]) => {
         for (const tag of tags) {
             if (tagMeaning.has(tag) || !tag) continue;
             
-            const response = await askTagMeaning(tag, categoriesOptions, subCategoriesOptions) as workingOn;
-            tagMeaning.set(tag, response);
+            const { activityCategory } = await askCategory(tag, categoriesOptions);
+            const { activity } = await askActivity(tag, getActivity(parseInt(activityCategory)));
+            
+            tagMeaning.set(tag, { activityCategory, activity });
+
             l.warn('Understood!');
         }
     }
