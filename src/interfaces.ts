@@ -11,7 +11,11 @@ export interface FormRegister {
     project: number,
     system: number,
     category: number,
-    
+    date: string,
+    startTime:string, 
+    endTime:string,
+    description: string,
+    controlType: string
 }
 
 export interface GetReportsAnswer {
