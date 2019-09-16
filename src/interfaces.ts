@@ -56,3 +56,10 @@ export interface workingOn {
     activityCategory: Category,
     activity: Category,
 }
+
+export interface Spaceship {
+    toCheckStart: Date,
+    toCheckEnd: Date,
+    start: Date,
+    end: Date,
+}
