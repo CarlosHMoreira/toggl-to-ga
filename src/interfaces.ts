@@ -7,17 +7,6 @@ export interface Config {
     password: string,
 }
 
-export interface FormRegister {
-    project: number,
-    system: number,
-    category: number,
-    activity: number,
-    date: string,
-    startTime:string, 
-    endTime:string,
-    description: string,
-    controlType: string
-}
 
 export interface GetReportsAnswer {
     reportsPath: string,
@@ -87,4 +76,16 @@ export interface Form {
     controlType: FormElement,
     submitAction: FormElement,
     errorsCtn: FormElement,
+}
+
+export interface FormRegister {
+    project: number,
+    system: number,
+    category: number,
+    activity: number,
+    date: string,
+    startTime:string, 
+    endTime:string,
+    description: string,
+    controlType: string
 }

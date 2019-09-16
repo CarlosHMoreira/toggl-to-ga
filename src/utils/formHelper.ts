@@ -32,6 +32,13 @@ export const setSelectValue = async (page: Page, selector: string, value: string
             page.select(querySelector, value)
         ]);
 
+        await page.waitForSelector(querySelector);
+        const elHandle = await page.$(querySelector);
+
+        // if (!elHandle) throw new Error(`Element ${selector} not found`);
+
+        // const jshandle = await elHandle.getProperty('value');
+        // await jshandle.jsonValue();
     } catch(error) {
         l.error('Error when triying to set a select option');
         throw error;
@@ -59,6 +66,14 @@ export const setInputValue = async (page: Page, selector: string, value: string,
             (shouldWait ? page.waitForNavigation() : Promise.resolve()) as Promise<Response|void>,
             typeIt(page, querySelector, value)
         ]);
+
+        // await page.waitForSelector(querySelector);
+        // const elHandle = await page.$(querySelector);
+
+        // if (!elHandle) throw new Error(`Element ${selector} not found`);
+
+        // const jshandle = await elHandle.getProperty('value');
+        // await jshandle.jsonValue();
 
     } catch(error) {
         l.error('Error when triying to set value to');

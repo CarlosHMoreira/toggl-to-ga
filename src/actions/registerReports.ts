@@ -1,5 +1,5 @@
 import { Page } from 'puppeteer';
-import { FormRegister } from '../interfaces';
+import { FormRegister, Form } from '../interfaces';
 import { FormElement } from '../interfaces';
 import { FormElementType } from '../enums';
 import { setInputValue, setSelectValue, getErrors } from '../utils/formHelper';
@@ -9,11 +9,9 @@ import formConfig from '../config/formConfig';
 const getEntriesWithConfig = (
     register: FormRegister, 
     configEntries: any[]
-) => Object.entries(register)
+) => (Object.entries(register) as Array<[keyof Form, string | number]>)
     .map(([property, value]) => {
-        const [_, config ] = configEntries
-            .find(([configProperty]) => configProperty == property) as any[];
-        
+        const config = formConfig[property];
         return {
             value: value.toString(),
             config
@@ -23,7 +21,7 @@ const getEntriesWithConfig = (
 const fillForm = async (page: Page, entries: { value: string, config: FormElement}[]) => {
     for (const { value, config } of entries) {
         const { name, type, shouldAwait } = config as FormElement;
-        if (type === FormElementType.Input) {
+        if (type === FormElementType.Input) {s
             await setInputValue(page, name, value, shouldAwait)
         }
 
@@ -39,6 +37,7 @@ export default async (page: Page, reports: FormRegister[]) => {
 
     for (const register of reports) {
         const entries = getEntriesWithConfig(register, configEntries);
+        
         await fillForm(page, entries);
     }
 

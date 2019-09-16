@@ -26,7 +26,8 @@ export default async () => {
     const registerList = await toRegisterList(fixedReport, projectMap, tagMap);  
     
     const browser = await puppeteer.launch({
-        headless: false,timeout: 60000,
+        headless: false,
+        timeout: 60000,
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',

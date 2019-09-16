@@ -3,9 +3,9 @@ import { FormElementType } from '../enums';
 
 export default {
     project: { name: 'ddlProjeto', type: FormElementType.Select },
-    system: { name: 'ddlSistema', type: FormElementType.Select, shouldAwait: true },
+    system: { name: 'ddlSistema', type: FormElementType.Select},
     category: { name: 'ddlCategoria', type: FormElementType.Select, shouldAwait: true },
-    activity: { name: 'ddlTipoAtividade', type: FormElementType.Select, shouldAwait: true},
+    activity: { name: 'ddlTipoAtividade', type: FormElementType.Select},
     date: { name: 'dtcDataDate', type: FormElementType.Input },
     startTime:{ name: 'txtInicioAtividade', type: FormElementType.Input },
     endTime: { name: 'txtFimAtividade', type: FormElementType.Input },
