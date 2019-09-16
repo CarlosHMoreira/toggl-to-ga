@@ -2,7 +2,7 @@ import { TogglRow } from '../interfaces';
 import { getStartDate, getEndDate } from '../utils/dateHelper';
 import isValidSpaceship from '../utils/spaceship';
 
-export default (report: TogglRow[]) => {
+export default (report: TogglRow[]): void => {
     const errors: any[] = [];
 
     const verify = (row: TogglRow, toCompare: TogglRow) => {
@@ -21,5 +21,9 @@ export default (report: TogglRow[]) => {
     const checkIconsistency = (row: TogglRow) => report.some(toCompare => verify(row, toCompare));
 
     report.forEach(checkIconsistency);
-    return errors;
+    
+    if (errors.length) {
+        console.table(errors);
+        throw new Error('Inconsistencies found!');
+    }
 }
