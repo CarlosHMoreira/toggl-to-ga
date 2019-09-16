@@ -1,4 +1,4 @@
-import { Category } from './enums';
+import { Category, FormElementType } from './enums';
 
 export interface Config {
     env: string,
@@ -67,4 +67,24 @@ export interface Spaceship {
     toCheckEnd: Date,
     start: Date,
     end: Date,
+}
+
+export interface FormElement {
+    name: string,
+    type: FormElementType,
+    shouldAwait?: boolean,
+}
+
+export interface Form {
+    project: FormElement,
+    system: FormElement,
+    category: FormElement,
+    activity: FormElement,
+    date: FormElement,
+    startTime: FormElement,
+    endTime: FormElement,
+    description: FormElement,
+    controlType: FormElement,
+    submitAction: FormElement,
+    errorsCtn: FormElement,
 }
