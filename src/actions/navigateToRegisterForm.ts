@@ -5,7 +5,7 @@ import l from '../utils/logger';
 
 export default async (page: Page, { gaUrl }: Config) => {
     const registerTimeUrl = `${gaUrl}Lists/RegistrosCanaisDigitais/NewForm.aspx?RootFolder`;
-    await page.goto(registerTimeUrl);
+    await page.goto(registerTimeUrl, { waitUntil: 'networkidle2' });
     
     l.info('Navigating to Register page.')
 };
