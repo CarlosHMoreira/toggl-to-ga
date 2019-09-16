@@ -11,6 +11,7 @@ export interface FormRegister {
     project: number,
     system: number,
     category: number,
+    activity: number,
     date: string,
     startTime:string, 
     endTime:string,
