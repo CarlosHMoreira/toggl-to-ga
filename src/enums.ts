@@ -51,3 +51,10 @@ export enum AbsencesActivityTypes {
     Ausencia = 138,
     Ausencia_Consultoria = 135,
 }
+
+export enum FormElementType {
+    Select,
+    Input,
+    Button,
+    Others,
+}
