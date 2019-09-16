@@ -57,6 +57,11 @@ export interface workingOn {
     activity: Category,
 }
 
+export interface ProjectAndSystem {
+    projectId: number,
+    systemId: number,
+}
+
 export interface Spaceship {
     toCheckStart: Date,
     toCheckEnd: Date,
