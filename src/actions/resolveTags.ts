@@ -63,15 +63,21 @@ const askActivity = async (
 export default async (reportData: TogglRow[]) => {
 
     const tagMeaning = new Map<string, workingOn>();
-    const categoriesOptions = getCategoriesOptions();
+    const categoriesOptions = getCategoriesOptions();    
 
-    for (const { Tags } of reportData) {
+    for (const { Tags, Description } of reportData) {
         const tags = getTags((Tags || ''));
+        
+        if (!tags.length) {
+            l.warn(`Record ${Description} without tag`);
+            l.info('This should be handled in next release.');
+            throw Error('No tag for register.')
+        }
 
         for (const tag of tags) {
             if (tagMeaning.has(tag) || !tag) continue;
-            
-            const { activityCategory } = await askCategory(tag, categoriesOptions);
+
+            const { activityCategory } = await askCategory(tag, [...categoriesOptions]);
             const { activity } = await askActivity(tag, getActivity(parseInt(activityCategory)));
             
             tagMeaning.set(tag, { activityCategory, activity });
