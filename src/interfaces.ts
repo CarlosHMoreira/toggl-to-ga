@@ -5,6 +5,7 @@ export interface Config {
     gaUrl: string,
     username: string,
     password: string,
+    debugInput: boolean
 }
 
 

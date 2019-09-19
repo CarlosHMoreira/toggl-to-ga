@@ -5,5 +5,6 @@ export default {
     gaUrl: process.env.GA_URL as string,
     username: process.env.LOGIN as string,
     password: process.env.PASSWD as string,
+    debugInput: process.env.DEBUG_INPUT === 'true'
 } as Config;
 
