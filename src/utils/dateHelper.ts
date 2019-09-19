@@ -12,8 +12,9 @@ const isValidTimeString = (timeString: string) => {
     }
 }
 
-export const getStartDate = (row: TogglRow, timeString: string|null = null) => new Date(`${row['Start date']}T${timeString ? timeString : row['Start time']}`);
-export const getEndDate = (row: TogglRow, timeString: string|null = null) => new Date(`${row['End date']}T${timeString ? timeString : row['End time']}`);
+const setTimestring = (timeString: string | undefined) => timeString ? timeString.replace(/\d{2}$/,"00"): '00:00:00';
+export const getStartDate = (row: TogglRow, timeString: string|null = null) => new Date(`${row['Start date']}T${timeString ? timeString : setTimestring(row['Start time'])}`);
+export const getEndDate = (row: TogglRow, timeString: string|null = null) => new Date(`${row['End date']}T${timeString ? timeString : setTimestring(row['End time'])}`);
 
 export const toRegisterDateStringFormat = (dateString = ''): string => {
     isValidDateString(dateString);
